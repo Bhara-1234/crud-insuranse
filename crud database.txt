@@ -1,0 +1,88 @@
+select * from InsurancePackages
+INSERT INTO InsurancePackages (insp_title, insp_desc, insp_status, insp_range_start, insp_range_end, insp_agelimit_start, insp_agelimit_end)
+VALUES
+('Basic Health Insurance', 'Covers essential medical expenses', 'Ac', 1000, 10000, 18, 65),
+('Term Life Insurance', 'Coverage for a fixed term with payout on death', 'Ac', 10000, 100000, 18, 75),
+('Health Insurance Plan A', 'Comprehensive health coverage', 'Ac', 2000, 15000, 20, 60),
+('Family Health Insurance', 'Coverage for the whole family', 'Ac', 5000, 20000, 0, 70),
+('Senior Health Insurance', 'Specialized coverage for seniors', 'Ac', 5000, 30000, 65, 90),
+('Student Health Insurance', 'Coverage for students', 'Ac', 1000, 8000, 18, 30);
+select * from Diseases
+update Diseases set disc_status='AC'
+CREATE TABLE InsurancePackageCoveredDiseases (
+    insp_id INT,
+    disc_id INT,
+    PRIMARY KEY (insp_id, disc_id),
+    FOREIGN KEY (insp_id) REFERENCES InsurancePackages(insp_id),
+    FOREIGN KEY (disc_id) REFERENCES Diseases(disc_id)
+);
+INSERT INTO InsurancePackageCoveredDiseases (insp_id, disc_id)
+VALUES
+(1, 1), -- Basic Health Insurance covers Influenza
+(1, 2), -- Basic Health Insurance covers Hypertension
+(1, 3); -- Basic Health Insurance covers Type 2 Diabetes
+
+INSERT INTO InsurancePackageCoveredDiseases (insp_id, disc_id)
+VALUES
+(2, 6), -- Term Life Insurance covers Cancer
+(2, 7), -- Term Life Insurance covers Heart Disease
+(2, 8); -- Term Life Insurance covers Migraine
+
+
+INSERT INTO InsurancePackageCoveredDiseases (insp_id, disc_id)
+VALUES
+(3, 1), -- Health Insurance Plan A covers Influenza
+(3, 2), -- Health Insurance Plan A covers Hypertension
+(3, 4); -- Health Insurance Plan A covers Asthma
+
+
+INSERT INTO InsurancePackageCoveredDiseases (insp_id, disc_id)
+VALUES
+(4, 1), -- Family Health Insurance covers Influenza
+(4, 2), -- Family Health Insurance covers Hypertension
+(4, 5); -- Family Health Insurance covers Osteoarthritis
+
+-- Insert data for Senior Health Insurance
+INSERT INTO InsurancePackageCoveredDiseases (insp_id, disc_id)
+VALUES
+(5, 1), -- Senior Health Insurance covers Influenza
+(5, 2), -- Senior Health Insurance covers Hypertension
+(5, 7); -- Senior Health Insurance covers Heart Disease
+
+-- Insert data for Student Health Insurance
+INSERT INTO InsurancePackageCoveredDiseases (insp_id, disc_id)
+VALUES
+(6, 1), -- Student Health Insurance covers Influenza
+(6, 2), -- Student Health Insurance covers Hypertension
+(6, 8); -- Student Health Insurance covers Migraine
+
+
+SELECT D.*
+FROM Diseases AS D
+JOIN InsurancePackageCoveredDiseases AS IPCD ON D.disc_id = IPCD.disc_id
+JOIN InsurancePackages AS IP ON IPCD.insp_id = IP.insp_id
+WHERE IP.insp_id = 1;
+
+
+"SELECT D.* FROM Diseases AS D JOIN InsurancePackages AS IP ON D.disc_id = IP.insp_id WHERE IP.insp_id =1;"
+
+
+SELECT D.*
+FROM Diseases AS D
+JOIN InsurancePackageCoveredDiseases AS IPCD ON D.disc_id = IPCD.disc_id
+JOIN InsurancePackages AS IP ON IPCD.insp_id = IP.insp_id
+WHERE IP.insp_id = 1;
+SELECT D.* FROM Diseases AS D JOIN InsurancePackageCoveredDiseases AS IPCD ON D.disc_id = IPCD.disc_id JOIN InsurancePackages AS IP ON IPCD.insp_id = IP.insp_id WHERE IP.insp_id = 1;
+
+
+
+
+select * from InsurancePackageCoveredDiseases
+insert into diseases values('Blurredvision','ad8',' High blood sugar levels can affect the eyes, causing blurred vision.','NA');
+
+INSERT INTO Diseases ( disc_name, disc_icdcode, disc_desc, disc_status) VALUES
+( 'enza', 'J10', 'Respiratory infection caused by influenza viruses', 'Active');
+select * from InsurancePackageCoveredDiseases
+select * from diseases
+
+
